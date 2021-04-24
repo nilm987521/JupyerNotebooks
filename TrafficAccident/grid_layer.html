@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~8.4.*/dist/index.js'></script>
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-map-container {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+#map {
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+#deckgl-overlay {
+  z-index: 2;
+  background: none;
+}
+
+#deck-map-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const jsonInput = {"initialViewState": {"bearing": 0, "latitude": 23.5, "longitude": 120.5, "maxRoom": 7, "minRoom": 7, "pitch": 45, "zoom": 7}, "layers": [{"@@type": "ColumnLayer", "autoHighlight": true, "data": [{"\u53d7\u50b7\u4eba\u6578": 2, "\u6b7b\u4ea1\u4eba\u6578": 11, "\u7d93\u5ea6": 120.6833, "\u7def\u5ea6": 23.9167}, {"\u53d7\u50b7\u4eba\u6578": 12, "\u6b7b\u4ea1\u4eba\u6578": 23, "\u7d93\u5ea6": 120.4497, "\u7def\u5ea6": 23.48}, {"\u53d7\u50b7\u4eba\u6578": 2, "\u6b7b\u4ea1\u4eba\u6578": 3, "\u7d93\u5ea6": 121.7419, "\u7def\u5ea6": 25.1283}, {"\u53d7\u50b7\u4eba\u6578": 50, "\u6b7b\u4ea1\u4eba\u6578": 25, "\u7d93\u5ea6": 121.75, "\u7def\u5ea6": 24.75}, {"\u53d7\u50b7\u4eba\u6578": 18, "\u6b7b\u4ea1\u4eba\u6578": 33, "\u7d93\u5ea6": 120.4942, "\u7def\u5ea6": 22.6761}, {"\u53d7\u50b7\u4eba\u6578": 12, "\u6b7b\u4ea1\u4eba\u6578": 32, "\u7d93\u5ea6": 120.5333, "\u7def\u5ea6": 24.0667}, {"\u53d7\u50b7\u4eba\u6578": 13, "\u6b7b\u4ea1\u4eba\u6578": 42, "\u7d93\u5ea6": "", "\u7def\u5ea6": ""}, {"\u53d7\u50b7\u4eba\u6578": 12, "\u6b7b\u4ea1\u4eba\u6578": 23, "\u7d93\u5ea6": 120.9714, "\u7def\u5ea6": 24.8047}, {"\u53d7\u50b7\u4eba\u6578": 15, "\u6b7b\u4ea1\u4eba\u6578": 42, "\u7d93\u5ea6": 121.3111, "\u7def\u5ea6": 24.9889}, {"\u53d7\u50b7\u4eba\u6578": 3, "\u6b7b\u4ea1\u4eba\u6578": 4, "\u7d93\u5ea6": "", "\u7def\u5ea6": ""}, {"\u53d7\u50b7\u4eba\u6578": 23, "\u6b7b\u4ea1\u4eba\u6578": 54, "\u7d93\u5ea6": 120.6667, "\u7def\u5ea6": 24.15}, {"\u53d7\u50b7\u4eba\u6578": 6, "\u6b7b\u4ea1\u4eba\u6578": 18, "\u7d93\u5ea6": 121.5319, "\u7def\u5ea6": 25.0478}, {"\u53d7\u50b7\u4eba\u6578": 17, "\u6b7b\u4ea1\u4eba\u6578": 62, "\u7d93\u5ea6": 120.1833, "\u7def\u5ea6": 22.9833}, {"\u53d7\u50b7\u4eba\u6578": 14, "\u6b7b\u4ea1\u4eba\u6578": 11, "\u7d93\u5ea6": 121.1444, "\u7def\u5ea6": 22.7583}, {"\u53d7\u50b7\u4eba\u6578": 8, "\u6b7b\u4ea1\u4eba\u6578": 16, "\u7d93\u5ea6": 121.6044, "\u7def\u5ea6": 23.9769}, {"\u53d7\u50b7\u4eba\u6578": 7, "\u6b7b\u4ea1\u4eba\u6578": 25, "\u7d93\u5ea6": 120.82, "\u7def\u5ea6": 24.57}, {"\u53d7\u50b7\u4eba\u6578": 13, "\u6b7b\u4ea1\u4eba\u6578": 32, "\u7d93\u5ea6": "", "\u7def\u5ea6": ""}, {"\u53d7\u50b7\u4eba\u6578": 26, "\u6b7b\u4ea1\u4eba\u6578": 58, "\u7d93\u5ea6": 120.3, "\u7def\u5ea6": 22.6167}], "elevationScale": 1000, "getElevation": "@@=\u6b7b\u4ea1\u4eba\u6578", "getFillColor": [100, 10, 10], "getPosition": "@@=[\u7d93\u5ea6, \u7def\u5ea6]", "id": "d7ed3100-8a0b-49d4-9cd9-f9760cac1ce7", "pickable": true, "radius": 750}], "mapProvider": "carto", "mapStyle": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json", "views": [{"@@type": "MapView", "controller": true}]};
+    const tooltip = {'text': '死亡人數: {死亡人數} '};
+    const customLibraries = null;
+
+    const deckInstance = createDeck({
+                  container: document.getElementById('deck-container'),
+      jsonInput,
+      tooltip,
+      customLibraries
+    });
+
+  </script>
+</html>
